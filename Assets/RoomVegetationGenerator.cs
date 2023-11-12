@@ -33,6 +33,7 @@ public class RoomVegetationGenerator : MonoBehaviour
     public Material zigZag;
     public List<GameObject> roomObjects;
     bool roomLoaded;
+    public GameObject redCurtainPrefab;
 
     private OVRSceneManager _ovrSceneManager;
     // Start is called before the first frame update

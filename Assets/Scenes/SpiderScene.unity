@@ -926,6 +926,7 @@ MonoBehaviour:
   swampMaterial: {fileID: 2100000, guid: 37df6aba92fd8314db667751a98e4be4, type: 2}
   zigZag: {fileID: 2100000, guid: 9f4c24d515e7544469b0c2cea5287a31, type: 2}
   roomObjects: []
+  redCurtainPrefab: {fileID: 7542446433114692815, guid: 06216961ef0224ef9a0d5c17e57a9c2d, type: 3}
 --- !u!4 &2057205643
 Transform:
   m_ObjectHideFlags: 0

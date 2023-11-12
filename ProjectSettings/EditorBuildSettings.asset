@@ -6,14 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Phanto/Scenes/LobbyScene.unity
+    path: Assets/Scenes/LobbyScene.unity
     guid: ffa7a77fbeb944c969fcf438d534232b
   - enabled: 1
-    path: Assets/Phanto/Scenes/GameScene.unity
-    guid: 9cb40f6d14299429884edf7a38c35ae6
-  - enabled: 1
-    path: Assets/Phanto/Scenes/TutorialScene.unity
-    guid: 4b65252a0b3a13f49a23daa1dfca485a
+    path: Assets/Scenes/SpiderScene.unity
+    guid: ea114e08f399948b4a46dc482f2e237d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: b786e5419bd49764b9416c9ae946a0d8, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 60398c8df0d5f4c44989dd764c021156, type: 2}

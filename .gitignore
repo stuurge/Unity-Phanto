@@ -26,5 +26,7 @@ obj
 
 Assets/Resources/buildinfo.json
 Assets/Resources/buildinfo.json.meta
-
+Assets/DreamForestTree/Materials/ClearSky.psd
+Assets/DreamForestTree/_HDRP patch/DreamTreesHDRP.unitypackage
+Assets/DreamForestTree/_URP patch/DreamTreesURP.unitypackage
 imgui.ini

@@ -51,6 +51,7 @@ public class RoomVegetationGenerator : MonoBehaviour
 
     IEnumerator GenerateEnvironment()
     {
+        GameObject ceiling = null;
         List<GameObject> walls =
             new List<GameObject>();
         while (_ovrSceneManager == null)
@@ -76,8 +77,8 @@ public class RoomVegetationGenerator : MonoBehaviour
             }
             else if (sceneObj.GetComponent<OVRSemanticClassification>().Labels[0].Equals("FLOOR"))
             {
-                Vector3 position = sceneObj.transform.position;
-                sceneObj.transform.position = new Vector3(position.x, position.y + 0.12f, position.z);
+                Vector3 positionFloor = sceneObj.transform.position;
+                sceneObj.transform.position = new Vector3(positionFloor.x, positionFloor.y + 0.12f, positionFloor.z);
                 MeshRenderer floorRenderer = sceneObj.GetComponent<MeshRenderer>();
                 floorRenderer.material = swampMaterial;
                 floorRenderer.enabled = true;
@@ -88,7 +89,10 @@ public class RoomVegetationGenerator : MonoBehaviour
                 sceneObj.transform.position = new Vector3(position.x, position.y - 0.2f, position.z);
                 //Vector3 rot = sceneObj.transform.rotation.eulerAngles;
                 //rot = new Vector3(rot.x + 180f, rot.y, rot.z);
+                Vector3 position = sceneObj.transform.position;
+                sceneObj.transform.position = new Vector3(position.x, position.y - 1f, position.z);
                 MeshRenderer ceilingRenderer = sceneObj.GetComponent<MeshRenderer>();
+                ceiling = sceneObj;
                 ceilingRenderer.material = zigZag;
                 ceilingRenderer.enabled = true;
             }
@@ -105,8 +109,16 @@ public class RoomVegetationGenerator : MonoBehaviour
     {
         foreach (GameObject wall in walls)
         {
-            Instantiate(redCurtainPrefab);
-            redCurtainPrefab.transform.position = wall.transform.position;
+            GameObject redCurtainObj = Instantiate(redCurtainPrefab, new Vector3(0f, -2f, 1f), Quaternion.Euler(-90, 0, 0));
+            redCurtainObj.transform.localScale = new Vector3(2.6f, 1f, 1.5f);
+            redCurtainObj.transform.SetParent(wall.transform, true);
+            Vector3 localPosition = redCurtainObj.transform.localPosition;
+            redCurtainObj.transform.localPosition = new Vector3(localPosition.x, localPosition.y - 4f, localPosition.z);
+            if (wall.name.Contains("13") || wall.name.Contains("16"))
+            {
+                Vector3 euler = redCurtainObj.transform.localRotation.eulerAngles;
+                redCurtainObj.transform.localRotation = Quaternion.Euler(euler.x, euler.y, 90f);
+            }
         }
     }
     private void SetRoomLoaded()

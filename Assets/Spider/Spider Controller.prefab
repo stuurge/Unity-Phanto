@@ -2544,9 +2544,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -2783,7 +2783,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -8359,6 +8359,7 @@ GameObject:
   - component: {fileID: 5356263202611163170}
   - component: {fileID: 8634589293312570790}
   - component: {fileID: 2058039777}
+  - component: {fileID: 9011109076742690607}
   m_Layer: 31
   m_Name: Spider Controller
   m_TagString: Untagged
@@ -8455,7 +8456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8634589293312570784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8be82a173e695a84cab101f570c93650, type: 3}
   m_Name: 
@@ -8566,6 +8567,19 @@ CapsuleCollider:
   m_Height: 0.022
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9011109076742690607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8634589293312570784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470cd038502650f4e8a44da8a57062e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystem: {fileID: 7900358256904712904}
 --- !u!1 &8634589293442604250
 GameObject:
   m_ObjectHideFlags: 0

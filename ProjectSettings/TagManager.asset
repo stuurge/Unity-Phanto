@@ -8,6 +8,9 @@ TagManager:
   - Fiero
   - Smoky
   - Object
+  - Manager
+  - Text
+  - Curtain
   layers:
   - Default
   - TransparentFX

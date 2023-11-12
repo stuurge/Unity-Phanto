@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 2057205642}
   m_Layer: 0
   m_Name: VegetationGenerator
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -934,7 +934,7 @@ MonoBehaviour:
   swampMaterial: {fileID: 2100000, guid: 37df6aba92fd8314db667751a98e4be4, type: 2}
   zigZag: {fileID: 2100000, guid: 9f4c24d515e7544469b0c2cea5287a31, type: 2}
   roomObjects: []
-  redCurtainPrefab: {fileID: 7542446433114692815, guid: 06216961ef0224ef9a0d5c17e57a9c2d, type: 3}
+  redCurtainPrefab: {fileID: 6647424817255192489, guid: 7bdd4fa4df6f33c4a87c59aa07d839d1, type: 3}
 --- !u!4 &2057205643
 Transform:
   m_ObjectHideFlags: 0

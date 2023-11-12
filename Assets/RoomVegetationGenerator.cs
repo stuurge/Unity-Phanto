@@ -76,7 +76,7 @@ public class RoomVegetationGenerator : MonoBehaviour
             else if (sceneObj.GetComponent<OVRSemanticClassification>().Labels[0].Equals("FLOOR"))
             {
                 Vector3 position = sceneObj.transform.position;
-                sceneObj.transform.position = new Vector3(position.x, position.y + 0.07f, position.z);
+                sceneObj.transform.position = new Vector3(position.x, position.y + 0.12f, position.z);
                 MeshRenderer floorRenderer = sceneObj.GetComponent<MeshRenderer>();
                 floorRenderer.material = swampMaterial;
                 floorRenderer.enabled = true;
@@ -84,10 +84,10 @@ public class RoomVegetationGenerator : MonoBehaviour
             else if (sceneObj.GetComponent<OVRSemanticClassification>().Labels[0].Equals("CEILING"))
             {
                 Vector3 position = sceneObj.transform.position;
-                sceneObj.transform.position = new Vector3(position.x, position.y - 0.1f, position.z);
-                MeshRenderer floorRenderer = sceneObj.GetComponent<MeshRenderer>();
-                floorRenderer.material = swampMaterial;
-                floorRenderer.enabled = true;
+                sceneObj.transform.position = new Vector3(position.x, position.y - 0.12f, position.z);
+                MeshRenderer ceilingRenderer = sceneObj.GetComponent<MeshRenderer>();
+                ceilingRenderer.material = zigZag;
+                ceilingRenderer.enabled = true;
             }
             else
             {

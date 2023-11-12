@@ -86,6 +86,8 @@ public class RoomVegetationGenerator : MonoBehaviour
             {
                 Vector3 position = sceneObj.transform.position;
                 sceneObj.transform.position = new Vector3(position.x, position.y - 0.12f, position.z);
+                //Vector3 rot = sceneObj.transform.rotation.eulerAngles;
+                //rot = new Vector3(rot.x + 180f, rot.y, rot.z);
                 MeshRenderer ceilingRenderer = sceneObj.GetComponent<MeshRenderer>();
                 ceilingRenderer.material = zigZag;
                 ceilingRenderer.enabled = true;
@@ -101,7 +103,11 @@ public class RoomVegetationGenerator : MonoBehaviour
     }
     private void SetWalls(List<GameObject> walls)
     {
-
+        foreach (GameObject wall in walls)
+        {
+            Instantiate(redCurtainPrefab);
+            redCurtainPrefab.transform.position = wall.transform.position;
+        }
     }
     private void SetRoomLoaded()
     {

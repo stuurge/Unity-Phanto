@@ -30,21 +30,28 @@ public class RoomVegetationGenerator : MonoBehaviour
     public float spiderScale;
     private OVRSceneRoom _roomData;
     public Material swampMaterial;
+    public Material zigZag;
+    public List<GameObject> roomObjects;
+    bool roomLoaded;
 
     private OVRSceneManager _ovrSceneManager;
     // Start is called before the first frame update
     void Start()
     {
-        _colorLut = new OVRPassthroughColorLut(colorLutPng);
+        //_colorLut = new OVRPassthroughColorLut(colorLutPng);
         playerCamera = GameObject.FindWithTag("MainCamera");
-        passthroughLayer = GameObject.FindWithTag("Player").GetComponentInChildren<OVRPassthroughLayer>();
-        StartCoroutine(StartSequence());
+        roomObjects = new List<GameObject>();
+        roomLoaded = false;
+        //passthroughLayer = GameObject.FindWithTag("Player").GetComponentInChildren<OVRPassthroughLayer>();
+        //StartCoroutine(StartSequence());
         StartCoroutine(GenerateEnvironment());
         StartCoroutine(StartSpider());
     }
 
     IEnumerator GenerateEnvironment()
     {
+        List<GameObject> walls =
+            new List<GameObject>();
         while (_ovrSceneManager == null)
         {
             _ovrSceneManager = loader.GetSceneManager();
@@ -56,14 +63,48 @@ public class RoomVegetationGenerator : MonoBehaviour
             _roomData = FindObjectOfType<OVRSceneRoom>();
             yield return null;
         }
-
-        MeshRenderer renderer = _roomData.Floor.gameObject.AddComponent<MeshRenderer>();
-        renderer.material = swampMaterial;
-        renderer.enabled = true;
-        foreach(Component comp in _roomData.Floor.GetComponents<Component>())
+        _ovrSceneManager.SceneModelLoadedSuccessfully += SetRoomLoaded;
+        yield return new WaitUntil(() => roomLoaded);
+        foreach (GameObject sceneObj in GameObject.FindGameObjectsWithTag("GlobalMesh"))
         {
-            Debug.LogError(comp.GetType());
+            if (sceneObj.GetComponent<OVRSemanticClassification>().Labels[0].Equals("GLOBAL_MESH"))
+            {
+                MeshRenderer volumeRenderer = sceneObj.GetComponent<MeshRenderer>();
+                volumeRenderer.material = swampMaterial;
+                volumeRenderer.enabled = true;
+            }
+            else if (sceneObj.GetComponent<OVRSemanticClassification>().Labels[0].Equals("FLOOR"))
+            {
+                Vector3 position = sceneObj.transform.position;
+                sceneObj.transform.position = new Vector3(position.x, position.y + 0.07f, position.z);
+                MeshRenderer floorRenderer = sceneObj.GetComponent<MeshRenderer>();
+                floorRenderer.material = swampMaterial;
+                floorRenderer.enabled = true;
+            }
+            else if (sceneObj.GetComponent<OVRSemanticClassification>().Labels[0].Equals("CEILING"))
+            {
+                Vector3 position = sceneObj.transform.position;
+                sceneObj.transform.position = new Vector3(position.x, position.y - 0.1f, position.z);
+                MeshRenderer floorRenderer = sceneObj.GetComponent<MeshRenderer>();
+                floorRenderer.material = swampMaterial;
+                floorRenderer.enabled = true;
+            }
+            else
+            {
+                walls.Add(sceneObj);
+            }
+            roomObjects.Add(sceneObj);
         }
+        int i = roomObjects.Count;
+        if (walls.Count > 0) SetWalls(walls);
+    }
+    private void SetWalls(List<GameObject> walls)
+    {
+
+    }
+    private void SetRoomLoaded()
+    {
+        roomLoaded = true;
     }
 
     IEnumerator StartSpider()

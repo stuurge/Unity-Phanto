@@ -93,6 +93,8 @@ public class RoomVegetationGenerator : MonoBehaviour
             }
             else if (sceneObj.GetComponent<OVRSemanticClassification>().Labels[0].Equals("CEILING"))
             {
+                Vector3 position = sceneObj.transform.position;
+                sceneObj.transform.position = new Vector3(position.x, position.y - 0.2f, position.z);
                 //Vector3 rot = sceneObj.transform.rotation.eulerAngles;
                 //rot = new Vector3(rot.x + 180f, rot.y, rot.z);
                 yield return new WaitForSeconds(0.3f);

@@ -38,12 +38,12 @@ public class RoomVegetationGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //_colorLut = new OVRPassthroughColorLut(colorLutPng);
+        _colorLut = new OVRPassthroughColorLut(colorLutPng);
         playerCamera = GameObject.FindWithTag("MainCamera");
         roomObjects = new List<GameObject>();
         roomLoaded = false;
-        //passthroughLayer = GameObject.FindWithTag("Player").GetComponentInChildren<OVRPassthroughLayer>();
-        //StartCoroutine(StartSequence());
+        passthroughLayer = GameObject.FindWithTag("Player").GetComponentInChildren<OVRPassthroughLayer>();
+        StartCoroutine(StartSequence());
         StartCoroutine(GenerateEnvironment());
         StartCoroutine(StartSpider());
     }

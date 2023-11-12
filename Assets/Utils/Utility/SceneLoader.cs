@@ -18,6 +18,7 @@ namespace PhantoUtils
         [SerializeField] private LoadSceneMode loadMode = LoadSceneMode.Additive;
 
         [SerializeField] private bool loadOnStart = true;
+        public OVRPassthroughLayer passthroughLayer;
 
         private void Start()
         {
@@ -33,6 +34,7 @@ namespace PhantoUtils
 
         public void LoadScene()
         {
+            passthroughLayer.overlayType = OVROverlay.OverlayType.Overlay;
             LoadSceneAsync();
         }
 

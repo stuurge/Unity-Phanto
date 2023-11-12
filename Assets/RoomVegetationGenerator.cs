@@ -40,6 +40,7 @@ public class RoomVegetationGenerator : MonoBehaviour
     public float originalHeight;
     public bool canTouchCurtain;
     CurtainScript curtain;
+    private ParticleSystem _particleSystem;
 
     private OVRSceneManager _ovrSceneManager;
     // Start is called before the first frame update
@@ -47,11 +48,12 @@ public class RoomVegetationGenerator : MonoBehaviour
     {
         _colorLut = new OVRPassthroughColorLut(colorLutPng);
         playerCamera = GameObject.FindWithTag("MainCamera");
+        _particleSystem = playerCamera.GetComponent<ParticleSystem>();
         originalHeight = playerCamera.transform.position.y;
         roomObjects = new List<GameObject>();
         roomLoaded = false;
         passthroughLayer = GameObject.FindWithTag("Player").GetComponentInChildren<OVRPassthroughLayer>();
-        StartCoroutine(StartSequence());
+        passthroughLayer.overlayType = OVROverlay.OverlayType.Overlay;
         StartCoroutine(GenerateEnvironment());
         StartCoroutine(StartSpider());
         StartCoroutine(WaitForService());
@@ -97,7 +99,6 @@ public class RoomVegetationGenerator : MonoBehaviour
                 sceneObj.transform.position = new Vector3(position.x, position.y - 0.2f, position.z);
                 //Vector3 rot = sceneObj.transform.rotation.eulerAngles;
                 //rot = new Vector3(rot.x + 180f, rot.y, rot.z);
-                yield return new WaitForSeconds(0.3f);
                 Vector3 ceilingPosition = sceneObj.transform.position;
                 Vector3 localPosition = sceneObj.transform.localPosition;
                 sceneObj.transform.position = new Vector3(ceilingPosition.x, ceilingPosition.y - 0.12f, ceilingPosition.z);
@@ -163,7 +164,7 @@ public class RoomVegetationGenerator : MonoBehaviour
         }
     }
 
-    IEnumerator StartSequence()
+    IEnumerator InvertPassthrough()
     {
         float oldValue = 0f;
         float newValue = 1f;
@@ -176,10 +177,13 @@ public class RoomVegetationGenerator : MonoBehaviour
             yield return null;
         }
         Debug.Log("Invert occured");
-        oldValue = 1f;
-        newValue = 0f;
-        someValue = 0f;
-        duration = 5;
+    }
+    IEnumerator RemovePassthrough()
+    {
+        float oldValue = 1f;
+        float newValue = 0f;
+        float someValue = 0f;
+        int duration = 8;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             someValue = Mathf.Lerp(oldValue, newValue, t / duration);
@@ -191,11 +195,28 @@ public class RoomVegetationGenerator : MonoBehaviour
     }
     IEnumerator WaitForService()
     {
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
         yield return new WaitUntil(() => GameObject.FindGameObjectWithTag("Text") != null);
         tmp = GameObject.FindGameObjectWithTag("Text").GetComponent<TextMeshPro>();
         tmp.text = "Follow the spider.";
         yield return new WaitUntil(() => activeSpider != null);
+        yield return new WaitForSeconds(5f);
+        //StartCoroutine(InvertPassthrough());
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        //yield return new WaitForSeconds(5f);
+        StartCoroutine(RemovePassthrough());
         yield return new WaitUntil(() => Vector3.Distance(playerCamera.transform.position, activeSpider.transform.position) < 2f);
+
         IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
@@ -203,10 +224,24 @@ public class RoomVegetationGenerator : MonoBehaviour
         IncreaseSpiderSize();
         IncreaseSpiderSize();
         //TODO: Cover your ears.
+
+        //tmp.text = "Cover your ears";
+        //yield return new WaitForSeconds(3f);
+        //_particleSystem.Play();
+        //yield return new WaitForSeconds(10f);
+        //_particleSystem.Stop();
+
         tmp.text = "Pet the spider.";
 
         SpiderInteractor _interactor = activeSpider.GetComponent<SpiderInteractor>();
+        yield return new WaitForSeconds(5f);
         yield return new WaitUntil(() => _interactor.petted);
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
@@ -218,7 +253,7 @@ public class RoomVegetationGenerator : MonoBehaviour
         tmp.text = "Don't touch anything.";
         canTouchCurtain = true;
         curtain = GameObject.FindGameObjectWithTag("Curtain").GetComponent<CurtainScript>() ;
-        int secondsToWait = 15;
+        int secondsToWait = 10;
         while (!curtain.isTouched)
         {
             yield return new WaitForSeconds(1f);
@@ -265,11 +300,13 @@ public class RoomVegetationGenerator : MonoBehaviour
     {
         curtain.isTouched = false;
         this.StopAllCoroutines();
-        //WHITE SCREEN CODE 
+        Application.Quit();
+        //WHITE SCREEN CODE
     }
     private void BlackScreenEnd()
     {
         this.StopAllCoroutines();
+        Application.Quit();
         //BLACK SCREEN CODE
     }
 

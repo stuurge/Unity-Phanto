@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpiderInteractor : MonoBehaviour
@@ -22,6 +23,9 @@ public class SpiderInteractor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (this.transform.position.y < -3)
+        {
+            this.transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+        }
     }
 }

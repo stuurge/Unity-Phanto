@@ -98,9 +98,9 @@ public class RoomVegetationGenerator : MonoBehaviour
                 //Vector3 rot = sceneObj.transform.rotation.eulerAngles;
                 //rot = new Vector3(rot.x + 180f, rot.y, rot.z);
                 yield return new WaitForSeconds(0.3f);
-                Vector3 position = sceneObj.transform.position;
+                Vector3 ceilingPosition = sceneObj.transform.position;
                 Vector3 localPosition = sceneObj.transform.localPosition;
-                sceneObj.transform.position = new Vector3(position.x, position.y - 0.12f, position.z);
+                sceneObj.transform.position = new Vector3(ceilingPosition.x, ceilingPosition.y - 0.12f, ceilingPosition.z);
                 sceneObj.transform.localPosition = new Vector3(localPosition.x, localPosition.y - .15f, localPosition.z);
                 MeshRenderer ceilingRenderer = sceneObj.GetComponent<MeshRenderer>();
                 ceiling = sceneObj;
@@ -200,11 +200,15 @@ public class RoomVegetationGenerator : MonoBehaviour
         IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
         //TODO: Cover your ears.
         tmp.text = "Pet the spider.";
 
         SpiderInteractor _interactor = activeSpider.GetComponent<SpiderInteractor>();
         yield return new WaitUntil(() => _interactor.petted);
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
@@ -226,8 +230,20 @@ public class RoomVegetationGenerator : MonoBehaviour
             WhiteScreenEnd();
             yield break;
         }
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
         tmp.text = "Kneel.";
         yield return new WaitUntil(() => playerCamera.transform.position.y < originalHeight);
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
         tmp.text = "Kneel More.";
         while (true)
         {

@@ -8456,7 +8456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8634589293312570784}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8be82a173e695a84cab101f570c93650, type: 3}
   m_Name: 
@@ -8580,6 +8580,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 7900358256904712904}
+  petted: 0
+  roomVegetationGenerator: {fileID: 0}
 --- !u!1 &8634589293442604250
 GameObject:
   m_ObjectHideFlags: 0

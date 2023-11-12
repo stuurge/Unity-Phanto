@@ -1,4 +1,5 @@
-using System;
+
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using Phantom.Environment.Scripts;
@@ -267,3 +268,4 @@ public class RoomVegetationGenerator : MonoBehaviour
         activeSpider.transform.localScale = new Vector3(scale.x + 1, scale.y + 1, scale.z + 1);
     }
 }
+*/

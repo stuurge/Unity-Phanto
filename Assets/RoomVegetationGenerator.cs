@@ -41,6 +41,8 @@ public class RoomVegetationGenerator : MonoBehaviour
     public bool canTouchCurtain;
     CurtainScript curtain;
     private ParticleSystem _particleSystem;
+    public AudioClip deathLoop;
+    public AudioSource audioSource;
 
     private OVRSceneManager _ovrSceneManager;
     // Start is called before the first frame update
@@ -48,6 +50,7 @@ public class RoomVegetationGenerator : MonoBehaviour
     {
         _colorLut = new OVRPassthroughColorLut(colorLutPng);
         playerCamera = GameObject.FindWithTag("MainCamera");
+        audioSource = playerCamera.AddComponent<AudioSource>();
         _particleSystem = playerCamera.GetComponent<ParticleSystem>();
         originalHeight = playerCamera.transform.position.y;
         roomObjects = new List<GameObject>();
@@ -124,7 +127,7 @@ public class RoomVegetationGenerator : MonoBehaviour
         foreach (GameObject wall in walls)
         {
             GameObject redCurtainObj = Instantiate(redCurtainPrefab, new Vector3(0f, 0f, 0.5f), Quaternion.identity);
-            redCurtainObj.transform.localScale = new Vector3(2.6f, 4f, 3.5f);
+            redCurtainObj.transform.localScale = new Vector3(1f, 2f, 2f);
             redCurtainObj.transform.SetParent(wall.transform, true);
             break;
             if (doRotation)
@@ -201,6 +204,8 @@ public class RoomVegetationGenerator : MonoBehaviour
         IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
+        audioSource.PlayOneShot(deathLoop);
+        audioSource.loop = true;
         yield return new WaitUntil(() => GameObject.FindGameObjectWithTag("Text") != null);
         tmp = GameObject.FindGameObjectWithTag("Text").GetComponent<TextMeshPro>();
         tmp.text = "Follow the spider.";
@@ -217,6 +222,18 @@ public class RoomVegetationGenerator : MonoBehaviour
         StartCoroutine(RemovePassthrough());
         yield return new WaitUntil(() => Vector3.Distance(playerCamera.transform.position, activeSpider.transform.position) < 2f);
 
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
+        IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
         IncreaseSpiderSize();
@@ -319,6 +336,6 @@ public class RoomVegetationGenerator : MonoBehaviour
         }
 
         Vector3 scale = activeSpider.transform.localScale;
-        activeSpider.transform.localScale = new Vector3(scale.x + 1, scale.y + 1, scale.z + 1);
+        activeSpider.transform.localScale = new Vector3(scale.x + 2, scale.y + 2, scale.z + 2);
     }
 }

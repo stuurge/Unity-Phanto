@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.053512458, g: 0.044517748, b: 0.026563957, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -935,6 +935,10 @@ MonoBehaviour:
   zigZag: {fileID: 2100000, guid: 9f4c24d515e7544469b0c2cea5287a31, type: 2}
   roomObjects: []
   redCurtainPrefab: {fileID: 6647424817255192489, guid: 7bdd4fa4df6f33c4a87c59aa07d839d1, type: 3}
+  tmp: {fileID: 0}
+  originalHeight: 0
+  canTouchCurtain: 0
+  deathLoop: {fileID: 8300000, guid: 9aeb575d848c5ac40be233dc8ac89f47, type: 3}
 --- !u!4 &2057205643
 Transform:
   m_ObjectHideFlags: 0
